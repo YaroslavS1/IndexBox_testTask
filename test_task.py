@@ -6,8 +6,7 @@ import docx
 
 class indexbox():
     def __init__(self):
-        # TODO все обернуть в класс и предоставить интерфейсы с помоью которых можно масштабировать и мнять логику
-        # TODO в конструктор в качестве параметров принимать год, фактор, путь к бд и прочее
+
         conn = sqlite3.connect("test.db")  # connect to test.db
 
         data = pd.read_sql(
@@ -30,7 +29,7 @@ class indexbox():
     def save_xlsx(self):
         """Method to save all DataFrame to format file .xlsx"""
 
-        # ! Добавляем в Dataframe factor 6
+
         df6 = self.__add_new_factor()
 
         self.data = pd.concat([self.data, df6], ignore_index=True)
@@ -75,7 +74,7 @@ class indexbox():
         cell = table.cell(1, 0)
         cell.merge(table.cell(15, 0))
 
-        # добавляем заголовок таблицы
+
         table.cell(0, 0).paragraphs[0].add_run('Factor').bold = True
         table.cell(0, 1).paragraphs[0].add_run('Year').bold = True
         table.cell(0, 2).paragraphs[0].add_run('World Value').bold = True
@@ -100,8 +99,9 @@ class indexbox():
         doc.save('report.docx')
 
 
-data_indexbox = indexbox()
-data_indexbox.save_docx()
-data_indexbox.save_xlsx()
+if __name__ == '__main__':
+    data_indexbox = indexbox()
+    data_indexbox.save_docx()
+    data_indexbox.save_xlsx()
 
 
